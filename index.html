@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="off canavas playground">
+        <meta name="author" content="Karol Zyskowski">
+        <title>off canvas playground</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div class="flex-container">
+            <header>
+                <!-- Click on 'hamburger menu icon' toggles 'right drawer' -->
+                <!-- CREDITS: https://developers.google.com/web/fundamentals/layouts/rwd-patterns/off- canvas?hl=en -->
+                <a id="menu" class="hamburger" title="menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z"/>
+                    </svg>
+                </a>
+            </header>
+            <main>
+                <div class="row">
+                    <div class="col-1 left-drawer">
+                        <!-- Click on 'arrow left' hides left drawer-->
+          	            <div id="hide-left-drawer" class="arrow-left" title="hide"></div>
+                    </div>
+                    <div class="col-2 right-drawer"></div>
+                    <div class="col-3">
+                        <!-- Show 'arrow right' when 'left drawer' is hidden
+                        Click on 'arrow right' shows 'left drawer' -->
+                        <div id="show-left-drawer" class="arrow-right show" title="show"></div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <script src="js/lib/jquery-1.11.3.js"></script>
+        <script>
+            /**
+             * toggle, hide and show DOM elements on click
+             *
+             */
+            function toggleVisibility(id) {
+                var elem = document.getElementById(id);
+             	elem.style.display = ((elem.style.display!='none') ? 'none' : 'block');
+            }
+
+            function hideElement(id) {
+    	        var elem = document.getElementById(id);
+                elem.style.display = ('none');
+            }
+
+            function showElement(id) {
+                var elem = document.getElementById(id);
+                elem.style.display = ('block');
+            }
+
+            /**
+             * drawers:
+             * - left drawer
+             * - right drawer
+             *
+             * click elements:
+             * - hamburger menu icon
+             * - left arrow
+             * - right arrow
+             * - right drawer
+             *
+             */
+            var menu = document.querySelector('#menu'),
+                hideLeftDrawer = document.querySelector('#hide-left-drawer'),
+                showLeftDrawer = document.querySelector('#show-left-drawer'),
+                main = document.querySelector('.right-drawer'),
+                leftDrawer = document.querySelector('.col-1'),
+                rightDrawer = document.querySelector('.col-2');
+
+            hideLeftDrawer.addEventListener('click', function(e) {
+                leftDrawer.classList.add('close');
+                showElement('show-left-drawer');
+                e.stopPropagation();
+            });
+
+            showLeftDrawer.addEventListener('click', function(e) {
+      	        leftDrawer.classList.remove('close');
+      	        hideElement('show-left-drawer');
+                e.stopPropagation();
+            });
+
+            /* Open the right drawer when click on hamburger menu icon
+            Close left drawer when right drawer opens */
+            menu.addEventListener('click', function(e) {
+      	        rightDrawer.classList.toggle('open');
+
+                if (rightDrawer.classList.contains('open')) {
+      	            leftDrawer.classList.add('close');
+                } else {
+      	            leftDrawer.classList.remove('close');
+                }
+                e.stopPropagation();
+            });
+
+            /* Close the right drawer when click on hamburger menu icon */
+            main.addEventListener('click', function(e) {
+                rightDrawer.classList.remove('open');
+                e.stopPropagation();
+            });
+
+        </script>
+    </body>
+</html>
