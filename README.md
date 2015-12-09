@@ -6,8 +6,12 @@ http://karoldavid.github.io/off-canvas
 
 #### Description:
 
+Off canvas playground
 
-#### Purpose:
+#### How to use
+
+Click on the arrows on the left and on the hamburger menu item on the top
+to open and close different off-canvas menus
 
 #### Resourses
 
