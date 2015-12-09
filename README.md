@@ -2,7 +2,7 @@
 
 ### Here is a link to the live version:
 
-http://karoldavid.github.io/offcanvas
+http://karoldavid.github.io/off-canvas
 
 #### Description:
 
